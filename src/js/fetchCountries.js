@@ -10,29 +10,6 @@ input.addEventListener('input', onInputSearch);
 //console.log(countryArrayLength);
 
 
-// function onInputSearch() {
-//      countryName = input.value;
-//      const countryList = fetch(`https://restcountries.eu/rest/v2/name/${countryName}`)
-//           .then((response) => response.json())
-//           .then(json => {
-//                console.log(json);
-//                countryArrayLength = json.length;
-//                callbackFn(countryArrayLength);
-//                console.log(countryArrayLength);
-               
-//         //Once succcessful callback return you can find length of number of item
-//                return countryArrayLength;
-//           })
-//           .catch(err => console.log(err));
-//      return countryList;
-// }
-// // const resultOfSearch = onInputSearch();
-// // console.log(resultOfSearch);
-
-// function callbackFn(data) {
-//      console.log(data);
-// }
-// callbackFn();
 
 function onInputSearch() {
      const countryName = input.value;
