@@ -10,34 +10,36 @@ console.log(input.value);
 
 input.addEventListener('input', onInputSearch);
 //console.log(countryArrayLength);
-// countryList.insertAdjacentElement('beforeend',)
+
 
 function onInputSearch() {
-     const countryName = input.value;
-     console.log(countryName);
-     //fetchCountryByName(countryName).then(createSingleCountryCard);
-     fetchCountryByName(countryName).then(onSuccessFetch);
-     console.log(fetchCountryByName(countryName))
+     
+     setTimeout(() => {
+          const countryName = input.value;
+          console.log(countryName);
+          fetchCountryByName(countryName).then(onSuccessFetch);
+          console.log(fetchCountryByName(countryName));
+     }, 1000)     
 };
-// // fetchCountryByName('Rus').then(onSuccessFetch);
 
 function fetchCountryByName(name) {
      return fetch(`https://restcountries.eu/rest/v2/name/${name}`)
           .then(response => response.json())
           // .catch(err => console.log(err));
 };
-// console.log(fetchCountryByName());
-
-function createSingleCountryCard(obj) {
-     return obj.map(countryName => {
-         return `<li>${countryName.name}</li>`
-     }).join('');     
-};
+//console.log(fetchCountryByName()); //вернет Promise (pending) как синхронная функция сообщнеие "Not found"
 
 function onSuccessFetch(country) {
-     createSingleCountryCard(country);
+     const markup = createSingleCountryCard(country);
+     countryList.insertAdjacentHTML('beforeend', markup);
      //console.log(country);
-}
+};
+
+function createSingleCountryCard(obj) { //разметка 1 строки с именем страны
+     return obj.map(countryName => {
+          return `<li>${countryName.name}</li>`
+     }).join('');
+};
 
 
 
