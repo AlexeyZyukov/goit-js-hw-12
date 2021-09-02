@@ -6,8 +6,6 @@ const result = document.querySelector('.input-data');
 const countryList = document.querySelector('.container');
 
 
-console.log(input.value);
-
 input.addEventListener('input', debounce(onInputSearch, 1000));
 
 function onInputSearch() {
@@ -32,11 +30,10 @@ function onSuccessFetch(country) {
           const singleMarkup = createSingleCountryCard(country);
           countryList.insertAdjacentHTML('beforeend', singleMarkup);
      }
-     if (country.length > 2 || country.length < 10) {
+     if (country.length >= 2 && country.length <= 10) {
           clearContent();
           const markup = createCountryList(country);
           countryList.insertAdjacentHTML('beforeend', markup);
-
      }
      //console.log(country);
 };
@@ -49,7 +46,7 @@ function clearContent() {
 
 function createCountryList(obj) { //разметка 1 строки с именем страны
      return obj.map(countryName => {
-          return `<li class="country_name"><span><b>Country name: </b></span>${countryName.name}</li>`
+          return `<li class="country_name"><span><b>Country: </b></span>${countryName.name}</li>`
      }).join('');
 };
 
