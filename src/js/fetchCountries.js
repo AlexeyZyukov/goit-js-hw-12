@@ -29,8 +29,8 @@ function onSuccessFetch(country) {
 
      if (country.length === 1) {
           clearContent();
-          const markup = createSingleCountryCard(country);
-          countryList.insertAdjacentHTML('beforeend', markup);
+          const singleMarkup = createSingleCountryCard(country);
+          countryList.insertAdjacentHTML('beforeend', singleMarkup);
      }
      if (country.length > 2 || country.length < 10) {
           clearContent();
@@ -39,6 +39,12 @@ function onSuccessFetch(country) {
 
      }
      //console.log(country);
+};
+
+function clearContent() {
+     input.value = "";
+     result.innerHTML = "";
+     countryList.innerHTML = '';
 };
 
 function createCountryList(obj) { //разметка 1 строки с именем страны
@@ -73,11 +79,7 @@ function createSingleCountryCard(obj) { //разметка 1 карточки с
      }).join('');
 };
 
-function clearContent() {
-     input.value = "";
-     result.innerHTML = "";
-     countryList.innerHTML = '';
-}
+
      
 
 // function createSingleCountryCard(obj) {
