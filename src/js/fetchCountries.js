@@ -2,8 +2,8 @@
 const debounce = require('lodash.debounce');
 
 const input = document.querySelector('#text-input');
-const result = document.querySelector('.input-data');
-const countryList = document.querySelector('.container');
+const result = document.querySelector('.input-message');
+const countryList = document.querySelector('.country-container');
 
 
 input.addEventListener('input', debounce(onInputSearch, 1000));
@@ -35,13 +35,11 @@ function onSuccessFetch(country) {
           const markup = createCountryList(country);
           countryList.insertAdjacentHTML('beforeend', markup);
      }
-     //console.log(country);
-};
-
-function clearContent() {
-     input.value = "";
-     result.innerHTML = "";
-     countryList.innerHTML = '';
+     if (country.length > 10) {
+          clearContent();
+          const message = `Слишком много совпадений. Уточните название страны`;
+          result.innerHTML = message;
+     }
 };
 
 function createCountryList(obj) { //разметка 1 строки с именем страны
@@ -71,13 +69,20 @@ function createSingleCountryCard(obj) { //разметка 1 карточки с
                     </ul> 
                     </p>
                </div>
-               <img src="${countryName.flag}" alt="${countryName.demonym}" class="country__img" width=300>
+               <img src="${countryName.flag}" alt="${countryName.demonym}" class="country__img" >
           </div>`
      }).join('');
 };
 
+function clearContent() {
+     input.value = "";
+     result.innerHTML = "";
+     countryList.innerHTML = '';
+};
 
-     
+// function tooManyResults() {
+
+// }
 
 // function createSingleCountryCard(obj) {
      
