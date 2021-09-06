@@ -9,26 +9,37 @@ const countryList = document.querySelector('.country-container');
 input.addEventListener('input', debounce(onInputSearch, 1000));
 
 function onInputSearch() {
-          const countryName = input.value;
-          console.log(countryName);
-          fetchCountryByName(countryName).then(onSuccessFetch);
+     const countryName = input.value;
+     console.log(countryName);
+     
+     fetchCountryByName(countryName)
+          .then(onSuccessFetchCountryMarkup)
+          //.then(errorCountryName());
           console.log(fetchCountryByName(countryName));     
 };
 
 function fetchCountryByName(name) {
      return fetch(`https://restcountries.eu/rest/v2/name/${name}`)
-          .then(response => response.json())
-          // .catch(err => console.log(err));
+          .then(response => {
+               console.log(response)
+               // console.log(response.json()) // в промисе после console.log(response.json()) передать данные дальше нельзя.
+               return response.json()
+          })
+          // .then(data => {
+          //      const searchResult = data;
+          //      console.log(searchResult)
+          // })
+          //.catch(error => errorCountryName(error));
 };
 //console.log(fetchCountryByName()); //вернет Promise (pending) как синхронная функция сообщнеие "Not found"
 
-function onSuccessFetch(country) { 
-     console.log(country.length); //country - массив стран, имеет св-во length
-
+function onSuccessFetchCountryMarkup(country) { 
+          console.log(country.length); //country - массив стран, имеет св-во length
+          
      if (country.length === 1) {
           clearContent()
           const singleMarkup = createSingleCountryCard(country);
-          countryList.insertAdjacentHTML('beforeend', singleMarkup);
+          countryList.innerHTML = singleMarkup;
      }
      if (country.length >= 2 && country.length <= 10) {
           clearContent();
@@ -75,34 +86,17 @@ function createSingleCountryCard(obj) { //разметка 1 карточки с
 };
 
 function clearContent() {
-     setTimeout(() => {
-        input.value = "";  
-     }, 5000);
+     // input.value = "";
      result.innerHTML = "";
      countryList.innerHTML = '';
 };
 
-// function tooManyResults() {
-
-// }
-
-// function createSingleCountryCard(obj) {
-     
-// }
-
-
-
-
-// function createCountryList(countryName) {
-//      const singleCountryCard = `<li>${countryName.name}</li>`;
-//      countryList.innerHTML = singleCountryCard;
-// };
-// function error(error) {
-//   alert('Упс, что-то пошло не так и мы не нашли вашего покемона!');
-// }
-
-//countryList.insertAdjacentHTML('beforeend', createCountryList);
-        
-
+function errorCountryName(error) {
+     clearContent();
+     if(error) {
+          const message = 'Ошибка в названии страны. Уточните запрос';
+          result.innerHTML = message;
+     };
+}
 
 
