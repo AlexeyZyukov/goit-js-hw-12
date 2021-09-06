@@ -25,17 +25,18 @@ function fetchCountryByName(name) {
                // console.log(response.json()) // в промисе после console.log(response.json()) передать данные дальше нельзя.
                return response.json()
           })
-          // .then(data => {
-          //      const searchResult = data;
-          //      console.log(searchResult)
-          // })
-          //.catch(error => errorCountryName(error));
 };
 //console.log(fetchCountryByName()); //вернет Promise (pending) как синхронная функция сообщнеие "Not found"
 
 function onSuccessFetchCountryMarkup(country) { 
           console.log(country.length); //country - массив стран, имеет св-во length
-          
+          console.log(country.status);
+     
+     if (country.status === 404) {
+          alert('you input wrong country name');
+          clearContent()
+     }
+
      if (country.length === 1) {
           clearContent()
           const singleMarkup = createSingleCountryCard(country);
