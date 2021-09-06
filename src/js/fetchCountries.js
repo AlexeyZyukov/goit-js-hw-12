@@ -1,4 +1,5 @@
 'use strict'
+import { error } from '@pnotify/core';
 const debounce = require('lodash.debounce');
 
 const input = document.querySelector('#text-input');
@@ -14,8 +15,7 @@ function onInputSearch() {
      
      fetchCountryByName(countryName)
           .then(onSuccessFetchCountryMarkup)
-          //.then(errorCountryName());
-          console.log(fetchCountryByName(countryName));     
+               console.log(fetchCountryByName(countryName));     
 };
 
 function fetchCountryByName(name) {
@@ -33,7 +33,12 @@ function onSuccessFetchCountryMarkup(country) {
           console.log(country.status); // show "response.status"
      
      if (country.status === 404) {
-          alert('you input wrong country name');
+          error({
+               text: 'Проверьте правильность ввода названия страны',
+               styling: 'brighttheme',
+               delay: 2000,
+          })
+          // alert('Проверьте правильность ввода названия страны');
           clearContent()
      }
 
@@ -49,8 +54,13 @@ function onSuccessFetchCountryMarkup(country) {
      }
      if (country.length > 10) {
           clearContent();
-          const message = `Слишком много совпадений. Уточните название страны`;
-          result.innerHTML = message;
+          error({
+               text: 'Слишком много совпадений. Уточните название страны',
+               styling: 'brighttheme',
+               delay: 2000,
+          });
+          // const message = `Слишком много совпадений. Уточните название страны`;
+          // result.innerHTML = message;
      }
 };
 
@@ -91,13 +101,4 @@ function clearContent() {
      result.innerHTML = "";
      countryList.innerHTML = '';
 };
-
-function errorCountryName(error) {
-     clearContent();
-     if(error) {
-          const message = 'Ошибка в названии страны. Уточните запрос';
-          result.innerHTML = message;
-     };
-}
-
 
