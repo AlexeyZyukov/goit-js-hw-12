@@ -26,7 +26,7 @@ function onSuccessFetch(country) {
      console.log(country.length); //country - массив стран, имеет св-во length
 
      if (country.length === 1) {
-          clearContent();
+          clearContent()
           const singleMarkup = createSingleCountryCard(country);
           countryList.insertAdjacentHTML('beforeend', singleMarkup);
      }
@@ -75,7 +75,9 @@ function createSingleCountryCard(obj) { //разметка 1 карточки с
 };
 
 function clearContent() {
-     input.value = "";
+     setTimeout(() => {
+        input.value = "";  
+     }, 5000);
      result.innerHTML = "";
      countryList.innerHTML = '';
 };
