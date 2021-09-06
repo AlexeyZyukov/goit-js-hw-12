@@ -30,7 +30,7 @@ function fetchCountryByName(name) {
 
 function onSuccessFetchCountryMarkup(country) { 
           console.log(country.length); //country - массив стран, имеет св-во length
-          console.log(country.status);
+          console.log(country.status); // show "response.status"
      
      if (country.status === 404) {
           alert('you input wrong country name');
