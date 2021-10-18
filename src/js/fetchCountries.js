@@ -12,14 +12,16 @@ input.addEventListener('input', debounce(onInputSearch, 1000));
 function onInputSearch() {
      const countryName = input.value;
      console.log(countryName);
-     
+
      fetchCountryByName(countryName)
           .then(onSuccessFetchCountryMarkup)
-               console.log(fetchCountryByName(countryName));     
+     console.log(fetchCountryByName(countryName));
 };
 
 function fetchCountryByName(name) {
-     return fetch(`https://restcountries.eu/rest/v2/name/${name}`)
+     return fetch(`https://restcountries.com/v2/name/${name}`)
+          // return fetch(`https://restcountries.com/v3.1/name/${name}`)
+
           .then(response => {
                console.log(response)
                // console.log(response.json()) // в промисе после console.log(response.json()) передать данные дальше нельзя.
@@ -28,10 +30,10 @@ function fetchCountryByName(name) {
 };
 //console.log(fetchCountryByName()); //вернет Promise (pending) как синхронная функция сообщнеие "Not found"
 
-function onSuccessFetchCountryMarkup(country) { 
-          console.log(country.length); //country - массив стран, имеет св-во length
-          console.log(country.status); // show "response.status"
-     
+function onSuccessFetchCountryMarkup(country) {
+     console.log(country.length); //country - массив стран, имеет св-во length
+     console.log(country.status); // show "response.status"
+
      if (country.status === 404) {
           error({
                text: 'Проверьте правильность ввода названия страны',
@@ -39,7 +41,7 @@ function onSuccessFetchCountryMarkup(country) {
                delay: 2000,
           })
           // alert('Проверьте правильность ввода названия страны');
-          clearContent()
+          // clearContent()
      }
 
      if (country.length === 1) {
@@ -65,33 +67,33 @@ function onSuccessFetchCountryMarkup(country) {
 };
 
 function createCountryList(obj) { //разметка 1 строки с именем страны
-     return obj.map(countryName => {
-          return `<li class="country_name"><span><b>Country: </b></span>${countryName.name}</li>`
+     return obj.map(objName => {
+          return `<li class="country_name"><span><b>Country: </b></span>${objName.name}</li>`
      }).join('');
 };
 
 function createSingleCountryCard(obj) { //разметка 1 карточки с данными страны
-     return obj.map(countryName => {
-          return `<h2 class="country__title-name">${countryName.name}</h2>
+     return obj.map(objName => {
+          return `<h2 class="country__title-name">${objName.name}</h2>
           <div class="country__box">
                <div class="country__content">
                     <p class="country__text">
-                         <span>Capital:</span> ${countryName.capital}
+                         <span>Capital:</span> ${objName.capital}
                     </p>
                     <p class="country__text">
-                         <span>Population:</span> ${countryName.population}
+                         <span>Population:</span> ${objName.population}
                     </p>
                     <p class="country__text">
                     <span>Languages:</span>
      
                     <ul class="country__languages-list">
-                    ${countryName.languages.map(language => //перебор массива внутри массива
-                         `<li>${language.name}</li>`
-                    ).join("")}
+                    ${objName.languages.map(language => //перебор массива внутри массива
+               `<li>${language.name}</li>`
+          ).join("")}
                     </ul> 
                     </p>
                </div>
-               <img src="${countryName.flag}" alt="${countryName.demonym}" class="country__img" >
+               <img src="${objName.flag}" alt="${objName.demonym}" class="country__img" >
           </div>`
      }).join('');
 };
