@@ -7,6 +7,7 @@ const result = document.querySelector('.input-message');
 const countryList = document.querySelector('.country-container');
 
 
+
 input.addEventListener('input', debounce(onInputSearch, 1000));
 
 function onInputSearch() {
@@ -28,9 +29,9 @@ function fetchCountryByName(name) {
                return response.json()
           })
 };
-//console.log(fetchCountryByName()); //вернет Promise (pending) как синхронная функция сообщнеие "Not found"
 
 function onSuccessFetchCountryMarkup(country) {
+     console.log(country);
      console.log(country.length); //country - массив стран, имеет св-во length
      console.log(country.status); // show "response.status"
 
@@ -52,7 +53,21 @@ function onSuccessFetchCountryMarkup(country) {
      if (country.length >= 2 && country.length <= 10) {
           clearContent();
           const markup = createCountryList(country);
+
           countryList.insertAdjacentHTML('beforeend', markup);
+
+          console.dir(countryList.textContent);
+
+          countryList.addEventListener('click', event => {
+               let target = event.target.lastChild.innerText;
+               console.dir(target);
+               console.dir(event.target);
+               if (!target) return;
+               clearContent();
+               input.value = target;
+               onInputSearch();
+               input.value = ""
+          });
      }
      if (country.length > 10) {
           clearContent();
@@ -68,7 +83,9 @@ function onSuccessFetchCountryMarkup(country) {
 
 function createCountryList(obj) { //разметка 1 строки с именем страны
      return obj.map(objName => {
-          return `<li class="country_name"><span><b>Country: </b></span>${objName.name}</li>`
+          console.dir(objName);
+          return `<li class="country_name">
+          <span><b>Country: </b></span> <span class="country_selected">${objName.name}</span></li>`
      }).join('');
 };
 

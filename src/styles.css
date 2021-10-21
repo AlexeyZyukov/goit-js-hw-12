@@ -68,3 +68,9 @@ body {
 .country__img {
   max-width: 100%;
 }
+
+.country_name:hover {
+  background-color: honeydew;
+  font-style: italic;
+  font-size: medium;
+}
