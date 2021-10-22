@@ -58,16 +58,32 @@ function onSuccessFetchCountryMarkup(country) {
 
           console.dir(countryList.textContent);
 
-          countryList.addEventListener('click', event => {
-               let target = event.target.lastChild.innerText;
-               console.dir(target);
-               console.dir(event.target);
-               if (!target) return;
-               clearContent();
-               input.value = target;
-               onInputSearch();
-               input.value = ""
-          });
+          // //=======реализация клика по стране из списка для получения информации о ней========
+          // countryList.addEventListener('click', event => {
+          //      let target = event.target.lastChild.innerText;
+          //      clearContent();
+          //      input.value = target;
+          //      onInputSearch();
+          //      input.value = ""
+
+          //      console.dir(target);
+          //      console.dir(event.target);
+          //      console.dir(event.target.lastChild);
+          //      console.dir(event.target.lastChild.nodeValue);
+          //      // if (event.target.tagName === 'LI' || event.target.tagName === 'B' || event.target.tagName === 'SPAN') {
+          //      //      let target = event.target.lastChild.innerText;
+          //      //      console.dir(event.target.tagName);
+          //      //      clearContent();
+
+          //      //      console.dir(target);
+          //      //      console.dir(event.target);
+          //      //      input.value = target;
+          //      //      onInputSearch();
+          //      //      input.value = ""
+          //      // } else {
+          //      //      return;
+          //      // }
+          // });
      }
      if (country.length > 10) {
           clearContent();
