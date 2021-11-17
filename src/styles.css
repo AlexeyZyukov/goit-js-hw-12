@@ -6,6 +6,7 @@ html {
 *::before,
 *::after {
   box-sizing: inherit;
+  border: dotted 1px red;
 }
 
 img {
@@ -33,9 +34,10 @@ body {
   border: none;
 }
 
-.input-message {
+/* .input-message {
   display: block;
-}
+
+} */
 
 .input-list {
   padding-left: 0;
@@ -61,7 +63,7 @@ body {
 }
 
 .country__languages-list {
-  font-size: 32px;
+  font-size: 20px;
   padding-left: 60px;
 }
 
@@ -70,7 +72,9 @@ body {
 }
 
 .country_name:hover {
+  font-size: 18px;
+  font-weight: 700;
   background-color: honeydew;
   font-style: italic;
-  font-size: medium;
+  cursor: pointer;
 }
