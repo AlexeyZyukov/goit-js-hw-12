@@ -350,3 +350,55 @@ function onClickAction() {
 //      }
 // };
 // console.log(run.factorial(5)); // 120
+//=======================
+// Коллекции DOM элементов
+// let result = [];
+// for (let link of document.links) {
+//      result.push(link.href);
+// }
+// console.log(result); // ['http://google.com', 'http://jsraccoon.ru', ...]
+//===================
+//===Class===
+// class Person {
+//      constructor(name) { //параметры, которые передаются в конструктор при вызове
+//           this.name = name;
+//      }
+//      sayName() { //метод, описывающий действие. К нему можно обратиться при вызове объекта
+//           console.log(`Person ${this.name} said his name`);
+//      }
+// }
+// const john = new Person('John');
+// john.sayName(); // Person John said his name
+
+// class GreatPerson extends Person {
+//      constructor(name, phrase, run) { //параметры, которые передаются в конструктор при вызове
+//           super(name);
+//           this.phrase = phrase;
+//           this.run = run;
+//      }
+//      sayPhrase() { //метод, описывающий действие. К нему можно обратиться при вызове объекта
+//           console.log(`${this.name} says: "${this.phrase}"`)
+//      }
+//      runSlow() {
+//           console.log(`${this.name} runs ${this.run}`);
+//      }
+
+//      runFast() {
+//           console.log(`${this.name} runs ${this.run}`);
+//      }
+// }
+// const jane = new GreatPerson('Jane', 'Hello, World!', 'with spead 6 km/h');
+// jane.sayName(); // Person Jane said his name
+// jane.sayPhrase(); // Jane says: "Hello, World!"
+// jane.runSlow();
+// jane.runFast();
+
+// const david = new GreatPerson('David', '', 'with spead 15 km/h'); //необходимо указать все 3 параметра, хоть пустые, определенные в constructor
+// david.sayName();
+// david.runFast();
+//===================
+// var obj = { a: 1 };
+// // у объекта нет свойства b
+// var { a: x, b: y } = obj;
+// // переменной y будет присвоено undefined
+// console.log(x, y); // 1 undefined
