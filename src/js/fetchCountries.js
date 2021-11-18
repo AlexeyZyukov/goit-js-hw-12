@@ -1,4 +1,5 @@
 'use strict'
+
 import { alert, error } from '@pnotify/core';
 import refs from './refs/refs.js';
 import { createCountryList, createSingleCountryCard } from './countryMarkup.js'
