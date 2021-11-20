@@ -1,10 +1,10 @@
 'use strict'
 class Figure {
     static type = 'FIGURE'
-    constructor(parameters) {
-        this.width = parameters.width
-        this.height = parameters.height
-        this.color = parameters.color
+    constructor(opts) {
+        this.width = opts.width
+        this.height = opts.height
+        this.color = opts.color
     }
 
     infoSay() {
@@ -22,12 +22,36 @@ box.infoSay();
 
 
 class Circle extends Figure {
-    constructor(parameters) {
-        super(parameters)
+    static type = 'CIRCLE'
+    constructor(opts) {
+        super(opts)
+        this.borderRadius = opts.borderRadius = 50
+    }
 
-        this.borderRadius = parameters.borderRadius
+    get actualWidth() {
+        console.log(this.width);
+    }
+
+    set actualWidth(newWidth) {
+        this.width = newWidth;
+    }
+
+    square() {
+        return `${(`${this.width}` * `${this.width}` / 4) * 3.14}`;
     }
 }
+const circle = new Circle({
+    width: 3,
+    color: 'red',
+})
+
+console.log(circle);
+console.log('circle square = ', circle.square());
+console.log('init width ', circle.actualWidth);
+console.log('new width ', circle.actualWidth = 5);
+console.log('circle square = ', circle.square());
+console.log('border radius = ', circle.borderRadius);
+console.log(circle);
 
 // const circle = new Circle({
 //     width: 200,
