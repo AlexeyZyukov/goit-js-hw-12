@@ -94,6 +94,10 @@ class Circle extends Component {
         this.$el.style.borderRadius = `50%`
         // this.$el.style.backgroundColor = opts.color
     }
+
+    showMessage() {
+        console.log('Hi')
+    }
 }
 
 const circle1 = new Circle({
@@ -111,3 +115,5 @@ const circleHide = () => {
 circle1El.addEventListener('mouseenter', () => circle1.square()); //передача функции circleHide, заменена на часть - анонимную стрелочную функцию
 
 circle1El.addEventListener('mouseleave', () => circle1.circle());
+
+circle1El.addEventListener('click', () => circle1.showMessage());
