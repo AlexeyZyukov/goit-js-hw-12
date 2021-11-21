@@ -78,18 +78,36 @@ class Circle extends Component {
     constructor(opts) {
         super(opts.selector)
         this.$el.style.width = this.$el.style.height = `${opts.size}px`
-        this.$el.style.background = opts.color //background - маленькими буквами, иначе не работает!!!
+        this.$el.style.backgroundColor = opts.color
         this.$el.style.border = `3px solid black`
         this.$el.style.borderRadius = `50%` //borderRadius - camelCase, иначе не работает!!!
         this.size = opts.size
         this.color = opts.color
     }
     showEl() { console.log(this.$el); }
+
+    square() {
+        this.$el.style.borderRadius = 0
+        // this.$el.style.backgroundColor = 'yellow'
+    }
+    circle() {
+        this.$el.style.borderRadius = `50%`
+        // this.$el.style.backgroundColor = opts.color
+    }
 }
 
 const circle1 = new Circle({
     selector: '#circle1',
     size: 300,
     color: 'red',
-}).showEl()
+})
 
+circle1.showEl();
+const circle1El = document.querySelector('#circle1')
+// circle1El.addEventListener('click', circle1.hide); //при передаче метода circle1.hide не работает... при вызове метода circle1.hide() сразу прячет элемент
+const circleHide = () => {
+    circle1.hide()
+}
+circle1El.addEventListener('mouseenter', () => circle1.square()); //передача функции circleHide, заменена на часть - анонимную стрелочную функцию
+
+circle1El.addEventListener('mouseleave', () => circle1.circle());
